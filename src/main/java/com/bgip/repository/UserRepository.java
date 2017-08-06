@@ -13,26 +13,9 @@ import com.mongodb.client.model.FindOptions;
 public interface UserRepository extends MongoRepository<User, String>, UserRepositoryCustom{
 
 
-	
+	public List<User> findAll();
 	public User findByEmail(String email);
     public List<User> findByUserName(String userName);
 	
-	
-	
-	
-	
-	
-	
-	
-	//	 public List < User > findUserByName(String userName);
-//	 
-//	 @Query(value = "{User: ?0, availability : 1}")
-//	 public List < User > findByUserOnlyAvailables(String sku);
-//
-//
-//	
-//	
-	
-	
-	
+
 }

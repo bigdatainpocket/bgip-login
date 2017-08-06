@@ -10,7 +10,6 @@ public class BaseBean implements Serializable{
 	@Id
 	public String id;
 	Date created;
-	private String timeDiff;
 	private String timeZone;
 	private String userName;
 
@@ -37,14 +36,6 @@ public class BaseBean implements Serializable{
 
 	public void setId(String id) {
 		this.id = id;
-	}	
-
-	public String getTimeDiff() {
-		return timeDiff;
-	}
-
-	public void setTimeDiff(String timeDiff) {
-		this.timeDiff = timeDiff;
 	}	
 
 	public String getTimeZone() {

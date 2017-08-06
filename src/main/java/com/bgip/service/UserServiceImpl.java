@@ -1,9 +1,11 @@
 package com.bgip.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import com.bgip.model.Response;
 import com.bgip.model.User;
@@ -16,7 +18,108 @@ public class UserServiceImpl implements UserService{
 	@Autowired
 	UserRepository userRepository;
 
+	
+	
+	@Override
+	public User userRegister(User user) {
+		try{
+			User usr = userRepository.save(user);
+			return usr;
+		}catch(Exception e){
+			System.out.println(e);
+		}
+		return null;
+		
+	}
+	
+	@Override
+	public List<User> login(String userName, String password) {
+		List<User> usrs1 = new ArrayList<User>();
+    	List<User> users = userRepository.findByUserName(userName);
+    	System.out.println(" Users : "+users);
+    	
+    	for( User usr : users){
+    		if( usr.getPassword().equals(password)){
+    			usr.setPassword(null);
+    			usrs1.add(usr);
+    		}
+    	}
+    	
+    	
+    	
+//    	for( User user : users){
+//    		
+//    		
+//    		
+//    			if( user.getPassword() == password){
+//    				System.out.println(" user.getPassword() == password :: "+user.getPassword() == password);
+//    				user.setPassword(null);
+//    				usrs.addAll(user);
+//    		}
+//    	}
+//    	
+    	return usrs1;
+		}
+	
+	
+	@Override
+	public Object forgotPassword(String userName, String oldPassword, String newPassword) {
+		List<User> users = userRepository.findByUserName(userName);
+		for( User user : users){
+    		if( user != null){
+    			if( user.getPassword() == oldPassword){
+    				user.setPassword(newPassword);
+    				 userRepository.save(user);
+    				return users;
+    			}
+    		}
+    	}
+		
+		return null;
+	}
 
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	@Override
+	public List<User> findByUserName(String userName) {
+		List<User> users = userRepository.findByUserName(userName);
+    	for( User user : users){
+    		user.setPassword(null);
+    	}
+		
+		return users;
+	}
+
+
+	@Override
+	public List<User> findAll() {
+		List<User> users = userRepository.findAll();
+		return users;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	
@@ -76,38 +179,9 @@ public class UserServiceImpl implements UserService{
 //	
 //	
 //	
-//	@Override
-//	public User saveUser(User user) {
-//		try{
-//			userRepository.save(user);
-//		}catch(Exception e){
-//			System.out.println(e);
-//		}
-//		return user;
-//		
-//	}
 
-	
-	
-//	@Override
-//	public User getUserInfo(String email) throws Exception {
-//		
-//		User usr = userRepository.getObjectByField("user", "email", email, User.class);
-//		
-//		if( usr != null){
-//			return usr;
-//		}
-//		
-//		
-//		return usr;
-//	}
-//
-//	
-	
-	
-	
-	
-	
+
+
 	
 	
 	
