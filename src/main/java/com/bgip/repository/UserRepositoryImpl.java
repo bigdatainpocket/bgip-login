@@ -1,84 +1,50 @@
 package com.bgip.repository;
 
-import java.util.List;
-
-import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
-import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.data.mongodb.core.query.Query;
 
-import com.bgip.model.User;
-import com.mongodb.WriteResult;
+public class UserRepositoryImpl implements UserRepositoryCustom{
 
-public class UserRepositoryImpl {
-
-	//Impl postfix of the name on it compared to the core repository interface
-	public class DomainRepositoryImpl implements UserRepositoryCustom {
-
-		@Autowired 
-		private MongoTemplate mongoTemplate;
-
+	
+	@Autowired
+	MongoTemplate mongoTemplate;
+	
+	
+	public void validateUser(String user){
 		
-
-		public <T> T getObjectByField(String collectionName, String fieldName, Object fieldValue, Class<T> className) 
-				throws Exception {
-			T object = null;
-			Query query = new Query(Criteria.where(fieldName).is(fieldValue));
+	}
+	
+	
+	public <T> T findBy2FieldsIn(String collectionName, String fieldName1, String fieldValue1, String fieldName2, String fieldValue2,
+			Class<T> className)  {
+		T object = null;
+		try {
+			Query query = new Query(Criteria.where(fieldName1).is(fieldValue1) .and(fieldName2).in(fieldValue2));
 			object = mongoTemplate.findOne(query, className, collectionName);
-			return object;
-		}
-		
-		
-		public <T> List<T> getAllObjects(String collectionName, Class<T> className) throws Exception {
-			List<T> objectList = null;
-			objectList = mongoTemplate.findAll(className, collectionName);
-			return objectList;
-		}
-		
-		
-		public <T> List<T> getObjectsByFieldIn(String collectionName, String fieldName, String fieldValue, Class<T> className) throws Exception {
-			List<T> objectList = null;
-			Query query = new Query(Criteria.where(fieldName).in(fieldValue));
-			objectList = mongoTemplate.find(query, className, collectionName);
-			return objectList;
-		}
-		
-		public <T> T getObjectByField(String collectionName, String fieldName, String fieldValue, Class<T> className) throws Exception {
-			T object = null;
-			Query query = new Query(Criteria.where(fieldName).is(fieldValue));
-			object = mongoTemplate.findOne(query, className, collectionName);
-			return object;
-		}
-		
-		public <T> WriteResult updateByObjectId(String collectionName,
-				String fieldName, ObjectId objectId, String key, String keyvalue)
-				throws Exception {
-			WriteResult object = null;
-			Query query = new Query(Criteria.where(fieldName).is(objectId));
-			Update update = new Update();
-			update.set(key, keyvalue);
-			object = mongoTemplate.updateFirst(query, update,
-					collectionName);
-			return object;
-		}
-		
-		
-		
-		public void deleteByField(String collectionName, String fieldName, String fieldValue) throws Exception {
 			
-			try {
-				Query query = new Query(Criteria.where(fieldName).is(fieldValue));
-				mongoTemplate.remove(query, collectionName);
-				
-			} catch (Exception e) {
-				throw new Exception(e);
+				} catch (Exception e) {
 			}
+		return object;
+	}
+	
+	public <T> T findByField(String collectionName, String fieldName1, String fieldValue1, Class<T> className){
 			
-		}
+		T object = null;
+		try {
+			Query query = new Query(Criteria.where(fieldName1).is(fieldValue1));
+			object = mongoTemplate.findOne(query, className, collectionName);
+			
+				} catch (Exception e) {
+			}
+		return object;
+	}
 
 
 	
-	}
+	
+	
+	
+	
 }

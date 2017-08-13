@@ -7,7 +7,9 @@ import org.slf4j.LoggerFactory;
 
 public class BgipException extends Exception{
 
-	  private static final Logger LOGGER = LoggerFactory.getLogger(BgipException.class);
+	private static final long serialVersionUID = 633746055431776833L;
+
+	private static final Logger LOGGER = LoggerFactory.getLogger(BgipException.class);
 
 	    private static final String DEFAULT_MSG = "BGIP Exception";
 

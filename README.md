@@ -13,6 +13,9 @@ Run the application in local:
 3) Execute java -jar target/cim_code_exercise-0.0.1-SNAPSHOT.jar
 4) Use http://localhost:8080
 
+Swagger:
+http://localhost:8080/swagger-ui.html
+
 Cloud & REST APIdetails in WIKI:
 https://github.com/aslamsyed/cim_code_exercise/wiki/CIM-Ad-Campaign-Code-Exercise
 

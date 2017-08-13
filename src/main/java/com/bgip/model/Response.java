@@ -1,6 +1,7 @@
 package com.bgip.model;
 
 public class Response {
+public Response(){}
 	private String responseCode;
 	private String message;
 	public Response(String responseCode, String message) {

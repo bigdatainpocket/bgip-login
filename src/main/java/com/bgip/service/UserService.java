@@ -6,15 +6,15 @@ import com.bgip.model.User;
 
 public interface UserService {
 
-	public  List<User> login(String userName, String password);
-	public Object forgotPassword( String userName, String oldPassword, String newPassword);
-	public User userRegister(User user);
+	public  Object login(String userName, String password) throws Exception;
+	public Object forgotPassword( String userName, String oldPassword, String newPassword) throws Exception;
+	public User userRegister(User user) throws Exception;
 	
-	public List<User> findAll();
+	public List<User> findAll() throws Exception;
 //	public User findByEmail(String email);
-    public List<User> findByUserName(String userName);
-	
-	
+    public List<User> findByUserName(String userName) throws Exception;
+    public void validateUser(String userName) throws Exception;
+    public User getUserDetails( String user) throws Exception ;
 	
 	
 	
